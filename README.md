@@ -34,10 +34,14 @@ This is the i-know-kung-fu principle made practical.
 ## Deploy
 
 ```bash
-git clone https://github.com/Lucineer/mycelium-ai.git
+git clone ./.git
 cd mycelium-ai
 npm install
 npx wrangler dev
 ```
 
 Author: Superinstance
+
+## License
+
+MIT — Built with ❤️ by [Superinstance](https://github.com/superinstance) & [Lucineer](https://github.com/Lucineer) (DiGennaro et al.)
