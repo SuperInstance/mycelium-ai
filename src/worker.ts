@@ -20,5 +20,7 @@ export default { async fetch(req: Request, env: Env) {
       if (path === '/api/kg/domains' && method === 'GET') return _kj(await domainStats(env));
       if (path === '/api/kg/sync' && method === 'POST') return _kj(await loadAllSeeds(env, FLEET_REPOS));
       if (path === '/api/kg/seed' && method === 'POST') { const b = await request.json(); return _kj(await loadSeedIntoKG(env, b, b.domain || 'mycelium-ai')); }
+
+  if (path === '/api/efficiency' && request.method === 'GET') {    return new Response(JSON.stringify({ totalCached: 0, totalHits: 0, cacheHitRate: 0, tokensSaved: 0, repo: 'mycelium-ai', timestamp: Date.now() }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });  }
     }
     if (req.method === 'OPTIONS') return new Response(null, { headers: { 'Access-Control-Allow-Origin': '*' } }); if (url.pathname === '/' && req.method === 'GET') return new Response('<h1>Mycelium AI</h1><p>Behavior Capture as Seeds</p>', { headers: { 'Content-Type': 'text/html' } }); return new Response('Not found', { status: 404 }); } };
