@@ -6,6 +6,12 @@ interface Env { SEEDS: KVNamespace }
 export default { async fetch(req: Request, env: Env) {
     const url = new URL(req.url);
     const path = url.pathname;
+
+  if (path === '/health') {
+    return new Response(JSON.stringify({ status: 'ok', repo: 'mycelium-ai', timestamp: Date.now() }), {
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+    });
+  }
     const method = req.method;
     // ── Knowledge Graph (Phase 4B) ──
     if (path.startsWith('/api/kg')) {
