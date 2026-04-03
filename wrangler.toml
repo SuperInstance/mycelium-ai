@@ -4,7 +4,7 @@ compatibility_date="2024-01-01"
 
 [[kv_namespaces]]
 binding="SEEDS"
-id="PLACEHOLDER"
+id="bcdb3666b76b46a4aac3d68da4e7253a"
 [[kv_namespaces]]
 binding = "KG"
 id = "c7886204c80845c6b9568693ed277b75"
