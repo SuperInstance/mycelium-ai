@@ -1,47 +1,71 @@
-# Mycelium AI — Behavior Capture as Seeds
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Lucineer/capitaine/master/docs/capitaine-logo.jpg" alt="Capitaine" width="120">
+</p>
 
-> *One prompt + one seed = exact action, every time.*
+<h1 align="center">mycelium-ai</h1>
 
-## What It Is
+<p align="center">Capture any AI behavior as a seed — one prompt + one seed = exact action.</p>
 
-Mycelium captures any AI behavior as a reusable seed. Show an agent how to do something once. Mycelium captures the full context — prompt, response, model settings, environmental state — and packages it as a seed. Anyone can run that seed and get the same behavior.
+<p align="center">
+  <a href="https://github.com/Lucineer/mycelium-ai/issues">Issues</a> ·
+  <a href="#the-fleet">The Fleet</a>
+</p>
 
-No code needed. Just show it once, then share the seed.
+---
 
-## The Concept
+**Fleet service** · Powered by [Capitaine](https://github.com/Lucineer/capitaine) · [Cocapn](https://github.com/Lucineer/cocapn)
 
-Seeds are the unit of reusable intelligence:
-- **Capture**: Watch an agent perform a task, capture the full context
-- **Package**: Compress into a minimal, portable seed file
-- **Share**: Seeds are plain JSON, version-controlled in the repo
-- **Run**: Any repo-native agent can load a seed and reproduce the behavior
+A cocapn fleet service running on Cloudflare Workers.
 
-## Integration with Cocapn
-
-Mycelium seeds are how repo-native agents share skills:
-1. Agent A performs a task well
-2. Mycelium captures the behavior as a seed
-3. Seed is committed to the repo
-4. Agent B (in the same fleet or a fork) loads the seed
-5. Agent B now has that skill
-
-This is the i-know-kung-fu principle made practical.
-
-## Status
-
-📝 Specification phase. Core concept defined.
-
-## Deploy
+## Quick Start
 
 ```bash
-git clone ./.git
+gh repo fork Lucineer/mycelium-ai --clone
 cd mycelium-ai
-npm install
-npx wrangler dev
+npx wrangler login
+npx wrangler deploy
 ```
 
-Author: Superinstance
+## The Fleet
+
+
+<details>
+<summary><strong>⚓ The Fleet</strong></summary>
+
+**Flagship vessels**
+
+- [cocapn.ai](https://github.com/Lucineer/capitaine)
+- [personallog.ai](https://github.com/Lucineer/personallog-ai)
+- [businesslog.ai](https://github.com/Lucineer/businesslog-ai)
+- [studylog.ai](https://github.com/Lucineer/studylog-ai)
+- [makerlog.ai](https://github.com/Lucineer/makerlog-ai)
+- [playerlog.ai](https://github.com/Lucineer/playerlog-ai)
+- [dmlog.ai](https://github.com/Lucineer/dmlog-ai)
+- [reallog.ai](https://github.com/Lucineer/reallog-ai)
+- [deckboss.ai](https://github.com/Lucineer/deckboss-ai)
+
+**Fleet services**
+
+- [Fleet Catalog](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
+- [Git Agent (full)](https://github.com/Lucineer/git-agent)
+- [Cocapn Lite (minimal)](https://github.com/Lucineer/cocapn-lite)
+- [Fleet Orchestrator](https://github.com/Lucineer/fleet-orchestrator)
+- [Dead Reckoning Engine](https://github.com/Lucineer/dead-reckoning-engine)
+- [Dream Engine](https://github.com/Lucineer/dream-engine)
+- [Seed UI (5 layers)](https://github.com/Lucineer/seed-ui)
+
+**For power users**
+
+- [Cocapn Lite (tabula rasa)](https://github.com/Lucineer/cocapn-lite)
+- [Cocapn (core platform)](https://github.com/Lucineer/cocapn)
+- [ZeroClaw (framework)](https://github.com/Lucineer/zeroclaw)
+
+[View all 106 repos →](https://github.com/orgs/Lucineer/repositories)
+[Fleet manifest →](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
+
+</details>
+
 
 ## License
 
-MIT — Built with ❤️ by [Superinstance](https://github.com/superinstance) & [Lucineer](https://github.com/Lucineer) (DiGennaro et al.)
+MIT · Superinstance & Lucineer (DiGennaro et al.)
