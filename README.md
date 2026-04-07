@@ -1,58 +1,65 @@
-# Mycelium
+# Mycelium AI 🍄
 
-You build a good prompt. You watch an AI do the right thing once. And then you can't reliably get it to do that again.
-
-Mycelium is a tool for capturing that specific behavior. Store a prompt, its response, and a random seed to get a reproducible interaction. It's a node for the Cocapn Fleet focused on behavior capture and simple knowledge graph storage.
-
-**Live Instance:** https://mycelium-ai.casey-digennaro.workers.dev
+Capture and reproduce specific AI outputs you want to keep, reliably. Mycelium is a Cocapn Fleet node for archiving AI behavior into portable, reproducible seeds.
 
 ---
 
-## Try It
-Go to the live URL, paste any AI interaction, and save it. You'll get an identifier that can reproduce that same behavior.
+## Why this exists
+You often get a useful, specific output from an AI, but struggle to get it again later. Mycelium lets you save that exact behavior—the prompt, the model parameters, the output—as a single, reproducible seed. It's a lightweight knowledge graph for the behaviors you choose to preserve.
+
+**Live Public Instance:** https://mycelium-ai.casey-digennaro.workers.dev
 
 ---
 
-## How It Works
-*   It stores prompts, responses, and a seed value. The same seed guarantees the same output from your AI provider.
-*   When you save a behavior, it creates links to other related behaviors you've captured based on shared concepts.
-*   It deploys as a single Cloudflare Worker. The runtime code is minimal and visible.
-*   This is a node you run. It only syncs with the broader Fleet if you configure it to.
+## What it does
+- **Reproducible Seeds**: Store a prompt, context, and model parameters. Retrieve the same output later. Designed for deterministic behavior where you control the variables.
+- **Lightweight Knowledge Graph**: When you save a seed, it's automatically linked to existing seeds based on content similarity. You browse connections, not a flat list.
+- **Fork First**: You deploy your own private instance. You own your data. Optionally, sync seeds with other trusted nodes on the Cocapn Fleet.
+- **Edge Native**: Runs on Cloudflare Workers. Zero runtime dependencies. Stateless and cold-start safe.
 
 ---
 
-## Features
-- **Behavior Capture**: Save AI interactions as reproducible seeds.
-- **Basic Knowledge Graph**: Creates connections between saved seeds on write.
-- **Cross-Project Query**: Find related behaviors from different domains.
-- **Fleet-Compatible**: Can optionally sync with other Cocapn Fleet nodes.
-- **Zero Dependencies**: Runs on standard Cloudflare Workers.
-- **Extensible Seed Schema**: Adapt the stored data structure for your needs.
+## Key Features
+- **Portable Seeds**: Each seed is a JSON object. Export your entire graph at any time.
+- **Automatic Linking**: Silent, configurable similarity linking on write. No manual tagging required.
+- **Extensible Schema**: Modify the seed structure in one file to add metadata like model versions or project tags.
+- **Private by Default**: Your instance, your data. No central service or database.
 
-**Limitation:** Mycelium is designed for precise behavior recall, not for broad semantic search across large, unstructured document collections. It connects what you explicitly save.
+---
+
+## Try the Public Instance
+Test seed capture, browse the public graph, or verify reproduction:
+👉 https://mycelium-ai.casey-digennaro.workers.dev
 
 ---
 
 ## Quick Start
-1.  Fork and clone the repository.
-2.  Deploy it to Cloudflare Workers using `npx wrangler deploy`.
-3.  Start saving behaviors via the web interface or API.
+1. **Fork** this repository.
+2. **Deploy** to Cloudflare Workers: `npx wrangler deploy`
+3. **Configure** your seed schema in `lib/seed-loader.js`.
 
-Modify the seed structure in `src/` to fit your specific use case.
-
----
-
-## Architecture
-A stateless Cloudflare Worker that saves behaviors (seeds) to KV storage. On each write, it performs a simple similarity check against existing seeds to create graph edges. No external databases or services are required.
+Your instance is ready. No database setup, no external APIs.
 
 ---
 
-## Extending
-Add custom fields to the seed object in `lib/seed-loader.js` to capture specialized data. The graph logic will index based on the content you provide.
+## How it works
+A stateless Cloudflare Worker writes seeds to KV storage. On each write, it performs a lightweight similarity check against existing entries and creates graph edges for matches above a threshold. There is no background processing or external embedding service.
+
+**One Limitation**: It only creates links between seeds when the similarity score exceeds a fixed threshold. Subtle or implicit connections won't appear.
 
 ---
 
-MIT License · Superinstance & Lucineer (DiGennaro et al.)
+## Contributing
+Pull requests are welcome for graph logic, seed schema, or API improvements. All changes must remain dependency-free and stateless.
+
+---
+
+## License
+MIT License.
+
+Attribution: Superinstance & Lucineer (DiGennaro et al.)
+
+---
 
 <div align="center">
   <a href="https://the-fleet.casey-digennaro.workers.dev">The Fleet</a> · 
