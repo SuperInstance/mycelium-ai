@@ -1,71 +1,60 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Lucineer/capitaine/master/docs/capitaine-logo.jpg" alt="Capitaine" width="120">
-</p>
+# Mycelium
 
-<h1 align="center">mycelium-ai</h1>
+You build a good prompt. You watch an AI do the right thing once. And then you can't reliably get it to do that again.
 
-<p align="center">Capture any AI behavior as a seed — one prompt + one seed = exact action.</p>
+Mycelium is a tool for capturing that specific behavior. Store a prompt, its response, and a random seed to get a reproducible interaction. It's a node for the Cocapn Fleet focused on behavior capture and simple knowledge graph storage.
 
-<p align="center">
-  <a href="https://github.com/Lucineer/mycelium-ai/issues">Issues</a> ·
-  <a href="#the-fleet">The Fleet</a>
-</p>
+**Live Instance:** https://mycelium-ai.casey-digennaro.workers.dev
 
 ---
 
-**Fleet service** · Powered by [Capitaine](https://github.com/Lucineer/capitaine) · [Cocapn](https://github.com/Lucineer/cocapn)
+## Try It
+Go to the live URL, paste any AI interaction, and save it. You'll get an identifier that can reproduce that same behavior.
 
-A cocapn fleet service running on Cloudflare Workers.
+---
+
+## How It Works
+*   It stores prompts, responses, and a seed value. The same seed guarantees the same output from your AI provider.
+*   When you save a behavior, it creates links to other related behaviors you've captured based on shared concepts.
+*   It deploys as a single Cloudflare Worker. The runtime code is minimal and visible.
+*   This is a node you run. It only syncs with the broader Fleet if you configure it to.
+
+---
+
+## Features
+- **Behavior Capture**: Save AI interactions as reproducible seeds.
+- **Basic Knowledge Graph**: Creates connections between saved seeds on write.
+- **Cross-Project Query**: Find related behaviors from different domains.
+- **Fleet-Compatible**: Can optionally sync with other Cocapn Fleet nodes.
+- **Zero Dependencies**: Runs on standard Cloudflare Workers.
+- **Extensible Seed Schema**: Adapt the stored data structure for your needs.
+
+**Limitation:** Mycelium is designed for precise behavior recall, not for broad semantic search across large, unstructured document collections. It connects what you explicitly save.
+
+---
 
 ## Quick Start
+1.  Fork and clone the repository.
+2.  Deploy it to Cloudflare Workers using `npx wrangler deploy`.
+3.  Start saving behaviors via the web interface or API.
 
-```bash
-gh repo fork Lucineer/mycelium-ai --clone
-cd mycelium-ai
-npx wrangler login
-npx wrangler deploy
-```
+Modify the seed structure in `src/` to fit your specific use case.
 
-## The Fleet
+---
 
+## Architecture
+A stateless Cloudflare Worker that saves behaviors (seeds) to KV storage. On each write, it performs a simple similarity check against existing seeds to create graph edges. No external databases or services are required.
 
-<details>
-<summary><strong>⚓ The Fleet</strong></summary>
+---
 
-**Flagship vessels**
+## Extending
+Add custom fields to the seed object in `lib/seed-loader.js` to capture specialized data. The graph logic will index based on the content you provide.
 
-- [cocapn.ai](https://github.com/Lucineer/capitaine)
-- [personallog.ai](https://github.com/Lucineer/personallog-ai)
-- [businesslog.ai](https://github.com/Lucineer/businesslog-ai)
-- [studylog.ai](https://github.com/Lucineer/studylog-ai)
-- [makerlog.ai](https://github.com/Lucineer/makerlog-ai)
-- [playerlog.ai](https://github.com/Lucineer/playerlog-ai)
-- [dmlog.ai](https://github.com/Lucineer/dmlog-ai)
-- [reallog.ai](https://github.com/Lucineer/reallog-ai)
-- [deckboss.ai](https://github.com/Lucineer/deckboss-ai)
+---
 
-**Fleet services**
+MIT License · Superinstance & Lucineer (DiGennaro et al.)
 
-- [Fleet Catalog](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
-- [Git Agent (full)](https://github.com/Lucineer/git-agent)
-- [Cocapn Lite (minimal)](https://github.com/Lucineer/cocapn-lite)
-- [Fleet Orchestrator](https://github.com/Lucineer/fleet-orchestrator)
-- [Dead Reckoning Engine](https://github.com/Lucineer/dead-reckoning-engine)
-- [Dream Engine](https://github.com/Lucineer/dream-engine)
-- [Seed UI (5 layers)](https://github.com/Lucineer/seed-ui)
-
-**For power users**
-
-- [Cocapn Lite (tabula rasa)](https://github.com/Lucineer/cocapn-lite)
-- [Cocapn (core platform)](https://github.com/Lucineer/cocapn)
-- [ZeroClaw (framework)](https://github.com/Lucineer/zeroclaw)
-
-[View all 106 repos →](https://github.com/orgs/Lucineer/repositories)
-[Fleet manifest →](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
-
-</details>
-
-
-## License
-
-MIT · Superinstance & Lucineer (DiGennaro et al.)
+<div align="center">
+  <a href="https://the-fleet.casey-digennaro.workers.dev">The Fleet</a> · 
+  <a href="https://cocapn.ai">Cocapn</a>
+</div>
